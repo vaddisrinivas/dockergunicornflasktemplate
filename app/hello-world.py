@@ -4,12 +4,12 @@ app = Flask(__name__)
 
 print("testing here")
 #setting configuration
-#conf = configparser.ConfigParser()
-#conf.read(filenames=os.environ["pyconf"])
+conf = configparser.ConfigParser()
+conf.read(filenames=os.environ["pyconf"])
 
 @app.route('/')
 def hello():
     return "Hello World!"
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host=conf.get("default","host"))
