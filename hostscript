@@ -1,0 +1,5 @@
+echo https://$git_username:$git_password@$git_host/$git_user/$(echo $project_name.git)
+git clone -b $git_branch  https://$git_username:$git_password@$git_host/$git_user/$(echo $project_name.git)
+pip install -r $project_name/requirements.txt
+export PYTHONPATH=/app/$project_name
+gunicorn  -c  /app/$project_name/gunicorn_config.py  --chdir /app/$project_name/app  $python_app:app
