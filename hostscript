@@ -2,5 +2,4 @@ echo $git_url
 git clone -b $git_branch  $git_url
 pip install -r $project_name/requirements.txt
 export PYTHONPATH=/app/$project_name
-cp -r /tmp/* /app/
 gunicorn  -c  /app/$project_name/gunicorn_config.py  --chdir /app/$project_name/app  $python_app:app
