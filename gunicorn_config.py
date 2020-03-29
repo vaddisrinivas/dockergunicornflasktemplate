@@ -13,5 +13,5 @@ backlog = 2048
 accesslog = '-'
 errorlog = '-'
 loglevel='debug'
-certfile=fullchain.pem
-keyfile=privkey.pem
+certfile="fullchain.pem"
+keyfile="privkey.pem"
