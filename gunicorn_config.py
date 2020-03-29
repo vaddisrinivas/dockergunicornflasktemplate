@@ -10,6 +10,7 @@ threads = 4
 proc_name = 'app01'
 bind = '0.0.0.0:5000'
 backlog = 2048
+STATIC_URL = '.'
 accesslog = '-'
 # errorlog = '-'
 # keyfile = 'privkey.pem'
