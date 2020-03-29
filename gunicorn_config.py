@@ -13,5 +13,5 @@ backlog = 2048
 accesslog = '-'
 errorlog = '-'
 loglevel='debug'
-certfile=server.crt 
-keyfile=server.key
+certfile=fullchain.pem
+keyfile=privkey.pem
