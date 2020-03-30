@@ -131,7 +131,7 @@ def shell_output(param):
 
 @app.route('/stats')
 def stats():
-	return shell_output("awk '{ print $1 } '/tmp/logfile'| uniq") 
+	return shell_output("awk '{ print $1 } '/tmp/errorfile'| uniq") 
 
 if __name__ == '__main__':
     app.run(host=conf.get("default","host"))
