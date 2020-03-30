@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,jsonify
 import configparser,sys,os
 app = Flask(__name__)
 
@@ -131,7 +131,6 @@ def shell_output(param):
 
 @app.route('/stats')
 def stats():
-	return shell_output("awk '{ print $1 } '/tmp/errorfile'| uniq") 
-
+	return jsonify(shell_output("awk '{ print $1 } '/tmp/errorfile'| uniq"))	
 if __name__ == '__main__':
     app.run(host=conf.get("default","host"))
