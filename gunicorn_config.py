@@ -1,4 +1,5 @@
 import os
+import time
 pidfile = 'app01.pid'
 worker_tmp_dir = '/dev/shm'
 worker_class = 'gthread'
@@ -13,5 +14,8 @@ backlog = 2048
 accesslog = '-'
 errorlog = '-'
 loglevel='debug'
+access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
 certfile="/tmp/fullchain.pem"
 keyfile="/tmp/privkey.pem"
+logfile ="/tmp/log"+str(time.time_ns())
+print(logfile)
