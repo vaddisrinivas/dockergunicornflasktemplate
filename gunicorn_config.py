@@ -17,5 +17,6 @@ loglevel='debug'
 access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
 certfile="/tmp/fullchain.pem"
 keyfile="/tmp/privkey.pem"
-logfile ="/tmp/log"+str(time.time_ns())
-print(logfile)
+logfile ="/tmp/logfile"
+errorlog = '/tmp/errorfile'
+capture_output = True
