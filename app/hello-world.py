@@ -95,7 +95,7 @@ p {
     """
 
 @app.route('/health')
-def hello():
+def status():
     return jsonify({"status":"running"})
 if __name__ == '__main__':
     app.run(host=conf.get("default","host"))
