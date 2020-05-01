@@ -100,8 +100,10 @@ p {
 def get_location():
 	try:
 	    location_data=geolocator.geocode(str(request.args["location"]))
+	    print(location_data)
 	    return jsonify({"latitude":location_data.latitude,"longitude":location_data.longitude})
 	except Exception as e:
+		print(e)
 		return ""
 @app.route('/health')
 def status():
