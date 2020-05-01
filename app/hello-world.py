@@ -1,4 +1,4 @@
-from flask import Flask,jsonify
+from flask import Flask,jsonify,request
 import configparser,sys,os
 from geopy.geocoders import Nominatim
 
