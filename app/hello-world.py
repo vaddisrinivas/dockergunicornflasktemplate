@@ -1,5 +1,8 @@
 from flask import Flask,jsonify
 import configparser,sys,os
+from geopy.geocoders import Nominatim
+
+geolocator = Nominatim(user_agent="testapp")	
 app = Flask(__name__)
 
 print(" Running Your App!")
@@ -93,7 +96,13 @@ p {
 </div>
  </body>
     """
-
+@app.route('/location')
+def get_location():
+	try:
+	    location_data=geolocator.geocode(str(request.args["location"]))
+	    return jsonify({"latitude":location_data.latitude,"longitude":location_data.longitude})
+	except Exception as e:
+		return ""
 @app.route('/health')
 def status():
     return jsonify({"status":"running"})
