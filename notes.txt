@@ -1,0 +1,11 @@
+ - geocoders.py
+ - pushing it to a db/file
+api
+front end
+reading from frontend
+reading location from browser
+
+
+rainfall data
+getting rainfall info from api
+showing it to the front end

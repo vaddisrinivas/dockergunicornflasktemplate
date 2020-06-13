@@ -1,4 +1,4 @@
-from flask import Flask,jsonify,request
+from flask import Flask, jsonify, request, render_template
 import configparser,sys,os
 from geopy.geocoders import Nominatim
 
@@ -8,7 +8,9 @@ app = Flask(__name__)
 print(" Running Your App!")
 #setting configuration
 conf = configparser.ConfigParser()
-conf.read(filenames=os.environ["pyconf"])
+conf.read(filenames=sys.argv[1])
+
+
 
 @app.route('/')
 def hello():
@@ -96,7 +98,9 @@ p {
 </div>
  </body>
     """
-@app.route('/location')
+
+
+@app.route('/place')
 def get_location():
 	try:
 	    location_data=geolocator.geocode(str(request.args["location"]))
@@ -105,8 +109,45 @@ def get_location():
 	except Exception as e:
 		print(e)
 		return ""
+
+
+@app.route('/reverse')
+def get_location_reverse():
+	try:
+	    location_data=geolocator.reverse(""+request.args["lat"]+","+request.args["long"]+"")
+	    print(location_data)
+	    return jsonify({"address":location_data.address})
+	except Exception as e:
+		print(e)
+		return ""
+
+@app.route('/all_places')
+def get_location_all():
+	list_of_jsons={}
+	try:
+		file_data=open("app/location.txt").readlines()
+		for i in file_data:
+			try:
+				location_data=geolocator.geocode(str(i.split("\t")[1]).strip())
+				list_of_jsons[str(i.split("\t")[1]).strip()]={"latitude": location_data.latitude, "longitude": location_data.longitude}
+			except Exception as e:
+				print(i.split("\t")[1])
+				continue
+		return jsonify(list_of_jsons)
+	except Exception as e:
+		print(e)
+		return ""
+
+
+
 @app.route('/health')
 def status():
     return jsonify({"status":"running"})
+
+@app.route('/home')
+def home():
+    return render_template("home.html")
+
+
 if __name__ == '__main__':
     app.run(host=conf.get("default","host"))
