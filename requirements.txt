@@ -1,3 +1,5 @@
 flask
 gunicorn
 geopy
+pymongo
+redis
