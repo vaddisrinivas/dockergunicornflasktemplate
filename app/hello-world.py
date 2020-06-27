@@ -116,7 +116,7 @@ def get_location():
 	    print(coll.insert({"timex":str(datetime.datetime.now())}))
 	    print(datetime.datetime.now()-x)
 	    x= datetime.datetime.now()
-	    write_redis.mset({str(i):time.time()})
+	    write_redis.mset({"new":time.time()})
 	    print(datetime.datetime.now()-x)
 	    return jsonify({"latitude":location_data.latitude,"longitude":location_data.longitude})
 	except Exception as e:
