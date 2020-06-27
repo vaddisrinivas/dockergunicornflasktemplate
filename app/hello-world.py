@@ -1,10 +1,17 @@
 from flask import Flask, jsonify, request, render_template
 import configparser,sys,os
 from geopy.geocoders import Nominatim
+from pymongo import MongoClient
+import datetime
 
+client = MongoClient('mongodb://instance-2:27017/')
+coll=client["test_database"]["test_coll"]
 geolocator = Nominatim(user_agent="testapp")	
 app = Flask(__name__)
-
+import redis
+import datetime
+import time
+write_redis = redis.Redis(host="instance-2",port="6379",password="")
 print(" Running Your App!")
 #setting configuration
 conf = configparser.ConfigParser()
@@ -105,6 +112,12 @@ def get_location():
 	try:
 	    location_data=geolocator.geocode(str(request.args["location"]))
 	    print(location_data)
+	    x= datetime.datetime.now()
+            print(coll.insert({"timex":str(datetime.datetime.now())}))
+            print(datetime.datetime.now()-x)
+	    x= datetime.datetime.now()
+	    write_redis.mset({str(i):time.time()})
+	    print(datetime.datetime.now()-x)
 	    return jsonify({"latitude":location_data.latitude,"longitude":location_data.longitude})
 	except Exception as e:
 		print(e)
